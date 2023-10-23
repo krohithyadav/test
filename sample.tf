@@ -6,3 +6,7 @@ env:
 jobs:
   deploy:
     uses: kuntrapakam/new1/.github/workflows/sample.yml@main
+    with:
+      lambda_function_name: sample
+      token: ${{secrets.TOKEN}}
+    secrets: inherit
