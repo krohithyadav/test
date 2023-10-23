@@ -1,0 +1,30 @@
+# .github/workflows/deploy_to_lambda.yaml
+name: Deploy to AWS Lambda
+on:
+  repository_dispatch:
+  workflow_call:
+    inputs:
+      lambda_function_name:
+        required: true
+        type: string
+    secrets:
+      TOKEN:
+        required: true
+env:
+  GIT_TOKEN: ${{secrets.GITHUB_TOKEN}}
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+      packages: write
+      pull-requests: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Update Lambda function
+        run: |
+           whoami
+      - name: Run composite action
+        uses: kuntrapakam/new1/.github/actions/sample@main
